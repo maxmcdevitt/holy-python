@@ -1,0 +1,13 @@
+   16 ./regex.py
+   37 ./src/graphics_main.py
+  139 ./src/castle.py
+   35 ./src/loc.py
+   40 ./src/user.py
+   13 ./src/functions.py
+  173 ./src/woods.py
+  147 ./src/cave.py
+   31 ./src/main.py
+  195 ./src/gameset.py
+   96 ./src/town.py
+   29 ./src/knight.py
+  951 total

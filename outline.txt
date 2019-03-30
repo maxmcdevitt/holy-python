@@ -1,0 +1,27 @@
+Leveling locations.
+
+1st level = woods
+2nd & 3rd level = Cave
+4th & 5th level = Town
+6th = Castle
+7th & 8th = Camelot
+9th & 10th = Unknown
+
+progress through the ten levels (with increasing difficulty) in correct order
+to be able to level up.
+
+Woods - travel through the woods and either fight a dragon (advanced option)
+and find your way to the end or travel to the end and choose between fighting
+the people you find.
+
+cave: fight the rabbit.
+
+
+Town: you will enter the town and sell goods. You will either succed and level
+up or not.
+
+Castle: You enter the castle and are challenged to a fight by a black knight.
+
+Camelot:  You have to fight a bunch of people with hopefully a gui.
+
+9 & 10: IDK yet. //TODO
