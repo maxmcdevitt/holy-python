@@ -9,7 +9,7 @@ Created in 2019
 # Released under the GNU General Public License
 
 
-import pygame
+import pygame as pg
 
 
 class Knight(object):
@@ -17,7 +17,7 @@ class Knight(object):
     def __init__(self, cwd):
         self.health = 100
         self.position = 1
-        self.knight = pygame.image.load(f"{cwd}"+"/images/knight.bmp")
+        self.knight = pg.image.load(f"{cwd}"+"/images/knight.bmp")
         self.k_rect = self.knight.get_rect()
         self.y = 0 # Vertical position
         self.x = 1 # Horizontal position

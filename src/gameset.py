@@ -5,13 +5,17 @@ Created in 2019
 
 @author: Max McDevitt
 """
+import os, json
+
+global cwd
+cwd = os.getcwd()
+
 
 import json, os
 from time import sleep
 
-def init():
-   """ Starts a fresh game """
-    cwd = os.getcwd()
+def _init():
+    """ Starts a fresh game """
     try:
         open(cwd+'/storage/charactername.json')
     except FileNotFoundError:

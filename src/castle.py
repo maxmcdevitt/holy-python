@@ -1,4 +1,12 @@
-"""                                     castle                          """
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Sun Dec  9 15:26:14 2018
+castle.py
+@author: Max McDevitt
+"""
+# Released under the GNU General Public License
+
 
 import time
 import loc

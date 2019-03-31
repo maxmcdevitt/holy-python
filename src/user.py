@@ -8,34 +8,62 @@ user.py
 
 # Released under the GNU General Public License
 
-
 import pygame as pg
-import sys
+import sys, os
+from pygame.sprite import Sprite
 
-class User(object):
-    def __init__(self, cwd):
-        self.health = 100
-        self.position = 1
+global cwd
+cwd = os.getcwd()
 
-        self.arrow = pg.image.load(f"{cwd}"+"/arrow.bmp")
-        self.bow = pg.image.load(f"{cwd}"+"/bow.bmp")
-        
-        self.k_rect = self.arrow.get_rect()
-        self.y = 0 # Vertical position
-        self.x = 1 # Horizontal position
+class Bow(Sprite):
+    def __init__(self, screen):
+        super().__init__()
 
-    def move(self):
-        for event in pygame.event.get():
-            elif event.type == KEYDOWN:
-                if event.key == K_UP:
-                    user.moveup()
-                if event.key == K_DOWN:
-                    user.movedown()
-            elif event.type == KEYUP:
-                if event.key == K_UP or event.key == K_DOWN:
-                    user.movepos = [0,0]
-        
+        self.bow = pg.image.load(f"{cwd}"+"/images/bow.bmp")
+        self.screen = screen
+        self.rect = self.bow.get_rect()
+
+        self.screen_rect = self.screen.get_rect()
+        self.rect.centerx = self.screen_rect.centerx
+        self.rect.bottom = self.screen_rect.bottom
+        self.center =  float(self.rect.centerx)
+
+        # Movement flags.
+        self.moving_right = False
+        self.moving_left = False        
     
-    def bow(self):
+    def center_bow(self):
+        self.center = self.screen_rect.centerx
 
-    def arrow(self):
+    def update(self):
+        """Update the bow's position, based on movement flags."""
+        # Update the bow's center value, not the rect.
+        if self.moving_right and self.rect.right < self.screen_rect.right:
+            self.center += 1
+        if self.moving_left and self.rect.left > 0:
+            self.center -= 1
+            
+        # Update rect object from self.center.
+        self.rect.centerx = self.center
+
+    def blitme(self):
+        """Draw the bow at its current location."""
+        self.screen.blit(self.bow, self.rect)
+
+class Arrow(Bow):
+    def __init__(self, screen):
+        super().__init__(screen)
+        self.y = float(self.rect.y)
+        self.arrow = pg.image.load(f"{cwd}"+"/images/arrow.bmp")
+        self.screen = screen
+        self.b = Bow(screen)
+        self.arect = self.b.rect
+
+    def update(self):
+        """Move the arrow up the screen."""
+        # Update the decimal position of the bullet.
+        self.y -= 3
+        # Update the rect position.
+        self.rect.y = self.y
+    def blitme(self):
+        self.screen.blit(self.arrow, self.arect.center) #TODO: Fix this <

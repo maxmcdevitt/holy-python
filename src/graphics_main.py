@@ -13,6 +13,10 @@ VERSION = "1"
 import sys, os
 from knight import Knight
 import pygame as pg
+from user import Arrow, Bow
+import functions as func
+from pygame.sprite import Group
+
 
 def main():
     pg.init()
@@ -23,15 +27,21 @@ def main():
 
     background = pg.image.load('images/bg.jpg').convert()
 
+    bow = Bow(screen)
+    arrow = Arrow(screen)
+    arrows = Group()
 
     while 1:
-        for event in pg.event.get():
-            if event.type == pg.QUIT:
-                return
-
+        func.check_events(screen,bow,arrows)
         k.move(cwd)
+        bow.update()
+        func.update_arrows(screen, bow, arrows)
         screen.blit(background, (0, 0))        #draw the background
         screen.blit(k.knight, k.k_rect)
+        for arrow in arrows.sprites():
+            arrow.blitme()
+        bow.blitme()
+        
         pg.display.flip()
 
 if __name__ == '__main__': 

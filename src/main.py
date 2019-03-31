@@ -7,10 +7,8 @@ main.py
 """
 # Released under the GNU General Public License
 
-import pygame
 import gameset as gs
 import loc as l
-from town import town
 
 
 active = True
@@ -21,7 +19,7 @@ def run():
     if q == 'y':
         level=""
         reputation=0
-        age,cname= gs.init()
+        age,cname= gs._init()
         level, reputation = gs.level_up(level, reputation, age, cname)
         gs.save(level, age, cname, reputation)
     else:
