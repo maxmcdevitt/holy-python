@@ -24,3 +24,9 @@ You can travel to:
 - And Unkknown ?
 
 
+###### How to download and run
+
+Either clone the repository or download and unpack the zip.
+
+Then simply compile the main.py file by:
+bash$  python main.py

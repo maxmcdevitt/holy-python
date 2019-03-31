@@ -1,2 +1,1 @@
-\TODO, make a regex script in c that copies the strings from the cgame and then use bash to put them into a file
 use gui and jupyter for game
