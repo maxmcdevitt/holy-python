@@ -2,73 +2,67 @@
 # -*- coding: utf-8 -*-
 """
 Created in 2019
-
+gameset.py
 @author: Max McDevitt
 """
+
 import os, json
+from time import sleep
 
 global cwd
 cwd = os.getcwd()
 
 
-import json, os
-from time import sleep
 
 def _init():
     """ Starts a fresh game """
     try:
-        open(cwd+'/storage/charactername.json')
-    except FileNotFoundError:
-        os.mkdir('storage')
+            os.mkdir('storage')
+    except FileExistsError:
+            pass
 
+    level = ""
+    reputation = 0
     cname = input("What will your character's name be?: ")
-
-    with open(cwd+'storage/charactername.json', 'w') as db:
-        json.dump(cname, db)
-
     age = input("What will your character's age be?\n::")
+    cl=0
+    data = {
+            "age":age,
+            "charactername":cname,
+            "cl":cl,
+            "reputation":reputation,
+            "level":level
+            }
 
-    with open(cwd+'storage/age.json','w') as f:
-        json.dump(age,f)
+    with open(cwd+"/storage/storage.json",'w') as f:
+        json.dump(data, f,
+        sort_keys=True,     
+        indent=4, separators=(',', ': '))
 
-    with open(cwd+'storage/cl.json','w') as f:
-        cl=0
-        json.dump(cl,f)
-
-    return age,cname
+        return cname,age
 
 
 def load_game():
-    with open('/home/i3/python/medieval_game/src/level.json') as f:
-        level = f.read()
-        f.close()
-    with open("/home/i3/python/medieval_game/src/age.json") as f:
-        age = f.read()
-        f.close()
-    with open('/home/i3/python/medieval_game/src/reputation.json') as f:
-        reputation = f.read()
-        f.close()
-    with open('/home/i3/python/medieval_game/src/charactername.json') as f:
-        cname = f.read()
-        f.close()
-    with open("/home/i3/python/medieval_game/src/reputation.json") as f:
-        reputation = f.read()
-        f.close()
-
-    return level, age, cname, reputation
+    with open(cwd+'/storage/storage.json', 'r') as f:
+            dic = json.loads(f.read())
+            level = dic.get("cname")
+            age = dic.get("age")
+            cname = dic.get("charactername")
+            reputation = dic.get("reputation")
+            cl = dic.get("cl")
+    return level, age, cname, reputation, cl
 
 
-def save(level, age, cname, reputation):
-    with open('/home/i3/python/medieval_game/src/level.json','w') as f:
-        json.dump(level, f)
-    with open('/home/i3/python/medieval_game/src/age.json','w') as f:
-        f.write(age)
-        f.close()
-    with open('/home/i3/python/medieval_game/src/charactername.json','w') as f:
-        f.write(cname)
-        f.close()
-    with open('/home/i3/python/medieval_game/src/reputation.json','w') as f:
-        json.dump(reputation, f)
+def save(level, age, cname, reputation, cl):
+    data = {
+            "age":age,
+            "charactername":cname,
+            "cl":cl,
+            "reputation":reputation,
+            "level":level
+            }
+    with open(cwd+'/storage/storage.json', 'w') as f:
+        json.dump(data, f, sort_keys=True, indent=4, separators=(',', ': '))
 
 
 def dunce():
@@ -93,7 +87,7 @@ def jester():
 
 def serf():
     print("\nThe serf is just the common peasant here in the medieval land.")
-    time.sleep(2)
+    sleep(2)
     print("\nThe serf owns a a small crop farm to pay taxes.")
     q = input("\nDo you want to see the Serf's powers?\n[yes/no]: ")
     if q == "yes" or q == 'y':
@@ -161,11 +155,9 @@ def king():
     if q == "yes" or q == 'y':
         print(power)
 
-def level_up(level, reputation, age, cname):
+def level_up(cname, age):
     print(f"Congrats, {cname}, you have leveled up!\n")
     print("*"*80)
-    file1="/home/i3/python/medieval_game/src/cl.json"
-
     lvl = {
             1:{1:dunce, 2:'dunce',3: -100},
             2:{1:jester, 2:'jester',3: -70},
@@ -179,21 +171,18 @@ def level_up(level, reputation, age, cname):
             10:{1:king, 2:'king', 3:100},
             }
 
-    while True:
-        try:
-            with open (file1) as f:
-                cl = f.read()
-                f.close()
-        except FileNotFoundError:
+    try:
+        with open (cwd+"/storage/storage.json") as f:
+            dic = json.load(f)
+            cl = dic["cl"]
+
+    except FileNotFoundError:
             cl=0
 
-        cl=int(cl)     # cl means current level
-        cl+=1
-        lvl.get(cl)[1]() # Call the appropriate function
-        level=lvl[cl][2] # Set level = to the appropritate level
-        reputation=lvl[cl][3]   # same as above but for reputation.
-        with open(file1, 'w') as f:
-            json.dump(cl, f)
-        save(level, age, cname, reputation)
-        break
-    return level, reputation
+    cl=int(cl)     # cl means current level
+    cl+=1
+    lvl.get(cl)[1]() # Call the appropriate function
+    level=lvl[cl][2] # Set level = to the appropritate level
+    reputation=lvl[cl][3]   # same as above but for reputation.
+    save(level, age, cname, reputation, cl)
+    return cl, level, reputation

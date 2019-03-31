@@ -17,13 +17,15 @@ incative = False
 def run():
     q = input("Do you want to start a new game?[y/n]\n: ")
     if q == 'y':
-        level=""
-        reputation=0
-        age,cname= gs._init()
-        level, reputation = gs.level_up(level, reputation, age, cname)
-        gs.save(level, age, cname, reputation)
+        
+        cname, age = gs._init()
+        cl, level, reputation = gs.level_up(cname, age)
+        gs.save(level, age, cname, reputation, cl)
+
     else:
         level, age, cname, reputation =gs.load_game()
-        print(f"Welcome back, {cname.title()}.")
-    l.navigate(cname, level, reputation, age)
+        print(f"\nWelcome back, {cname}.\n")
+
+    l.navigate(cname, level, reputation, age, cl)
+
 run()
