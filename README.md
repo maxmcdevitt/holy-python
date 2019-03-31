@@ -1,6 +1,6 @@
-###### Medieval Game
+###### Holy Python
 
-This is a text based game which derives content from Monty Python, since it is written in Python.
+This is a game based off Monty Python, since it is written in Python.
     :snake:
     :snake:
 
