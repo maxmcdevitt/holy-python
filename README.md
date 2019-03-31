@@ -5,7 +5,7 @@ This is a game based off Monty Python, since it is written in Python.
     :snake:
 
 
-In this game you create a character and explore a series of locations, while trying to progress through ten levels!
+In this game you create a character and explore a series of locations, while trying to progress through ten levels.
 
 It automatically saves your progress which allows the player to resume where they left off.
 
@@ -29,4 +29,6 @@ You can travel to:
 Either clone the repository or download and unpack the zip.
 
 Then simply compile the main.py file by:
+
+
 bash$  python main.py
