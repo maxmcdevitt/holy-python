@@ -18,7 +18,7 @@ cwd = os.getcwd()
 class Bow(Sprite):
     def __init__(self, screen):
         super().__init__()
-
+        self.health = 100
         self.bow = pg.image.load(f"{cwd}"+"/images/bow.bmp")
         self.screen = screen
         self.rect = self.bow.get_rect()
@@ -50,14 +50,15 @@ class Bow(Sprite):
         """Draw the bow at its current location."""
         self.screen.blit(self.bow, self.rect)
 
-class Arrow(Bow):
-    def __init__(self, screen):
-        super().__init__(screen)
-        self.y = float(self.rect.y)
+class Arrow(Sprite):
+    def __init__(self, screen, bow):
+        super(Arrow, self).__init__()
         self.arrow = pg.image.load(f"{cwd}"+"/images/arrow.bmp")
         self.screen = screen
-        self.b = Bow(screen)
-        self.arect = self.b.rect
+        self.rect = self.arrow.get_rect()
+        self.rect.centerx = bow.rect.centerx
+        self.rect.top =  bow.rect.top
+        self.y = float(self.rect.y)
 
     def update(self):
         """Move the arrow up the screen."""
@@ -66,4 +67,7 @@ class Arrow(Bow):
         # Update the rect position.
         self.rect.y = self.y
     def blitme(self):
-        self.screen.blit(self.arrow, self.arect.center) #TODO: Fix this <
+        self.screen.blit(self.arrow, self.rect)
+
+
+#        pg.draw.rect(self.screen, s, self.rect)

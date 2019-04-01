@@ -9,9 +9,11 @@ functions.py
 # Released under the GNU General Public License
 
 import sys
+from scoreboard import Scoreboard
 from time import sleep
 import pygame as pg
 from user import Arrow
+
 
 def check_keydown_events(event, screen, bow, arrows):
     """Respond to keypresses."""
@@ -45,7 +47,7 @@ def fire_arrow( screen, bow, arrows):
     """Fire a arrow, if limit not reached yet."""
     # Create a new arrow, add to arrows group.
     if len(arrows) < 1:
-        new_arrow = Arrow(screen)
+        new_arrow = Arrow(screen, bow)
         arrows.add(new_arrow)
 
 def update_arrows(screen, bow, arrows):
@@ -86,17 +88,21 @@ def win(screen):
         pg.display.flip()
              
         
-def check_arrow_knight_collision(screen, bow, knight, arrows):
+def check_arrow_knight_collision(screen, bow, knight, arrow):
     """Respond to arrow-knight collisions."""
     # Remove any arrows that have collided.
-    collisions = pg.sprite.groupcollide(arrows, knight, True, True)
-    
+    global sb
+    sb = Scoreboard(screen)
+    collisions = knight.k_rect.colliderect(arrow.arrow.get_rect())
+#    pg.sprite.groupcollide(arrows, knight.k_rect, True, True)
+
     if collisions:
-        knight.health - 5    
+        knight.health - 5
+        sb.show_health()
     if knight.health == 0:
         win(screen)
 
-def check_fb_bow_collisions(screen, bow, fbs):
+def check_fb_bow_collisions(screen, bow, fbs, arrows):
     """Respond to arrow-knight collisions."""
     # Remove any arrows that have collided.
     collisions = pg.sprite.groupcollide(fbs, bow, True, True)

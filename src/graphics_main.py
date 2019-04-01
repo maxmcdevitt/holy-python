@@ -9,7 +9,7 @@ graphics_main.py
 # Released under the GNU General Public License
 
 VERSION = "1"
-
+from scoreboard import Scoreboard
 import sys, os
 from knight import Knight
 import pygame as pg
@@ -28,12 +28,13 @@ def main():
     background = pg.image.load('images/bg.jpg').convert()
 
     bow = Bow(screen)
-    arrow = Arrow(screen)
+    arrow = Arrow(screen, bow)
     arrows = Group()
-
+    sb = Scoreboard(screen)
     while 1:
         func.check_events(screen,bow,arrows)
         k.move(cwd)
+        func.check_arrow_knight_collision(screen, bow, k, arrow)
         bow.update()
         func.update_arrows(screen, bow, arrows)
         screen.blit(background, (0, 0))        #draw the background
@@ -41,7 +42,7 @@ def main():
         for arrow in arrows.sprites():
             arrow.blitme()
         bow.blitme()
-        
+        sb.show_health()
         pg.display.flip()
 
 if __name__ == '__main__': 
