@@ -30,6 +30,12 @@ You can travel to:
 ###### How to download and run
 
 bash$  git clone https://github.com/maxmcdevitt/holy-python.git
+
+
 bash$  cd holy-python/src/
+
+
 bash$  chmod +x main.py
+
+
 bash$  ./main.py
