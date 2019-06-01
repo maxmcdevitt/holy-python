@@ -1,3 +1,6 @@
+* Note: This game is not meant to be good, or even entertaining.
+* I myself struggle to play this game due to the sheer mundane nature.
+
 ###### Holy Python
 
 This is a game based off Monty Python, since it is written in Python.

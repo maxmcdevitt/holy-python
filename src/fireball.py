@@ -12,28 +12,27 @@ import  pygame as pg
 from pygame.sprite import Sprite
 
 class Fireball(Sprite):
-    def __init__(self, screen, cwd):
-        super().__init__()
-        self.fb = pg.image.load(f"{cwd}"+"/images/fireball.bmp")
+    def __init__(self, screen, knight):
+        """Create a fb object, at the ship's current position."""
+        super(Fireball, self).__init__()
         self.screen = screen
-        self.f_rect = self.fb.get_rect()
-        self.y = float(self.f_rect.y)
-        self.x = 1 # Horizontal position
+
+        # Create fb rect at (0, 0), then set correct position.
+        self.rect = pg.Rect(0, 0, 3, 3)
+        self.rect.centerx = knight.rect.centerx
+        self.rect.top = knight.rect.top
+        
+        # Store a decimal value for the fb's position.
+        self.y = float(self.rect.y)
+
+        self.speed_factor = 4
 
     def update(self):
-        """Move the arrow up the screen."""
-        self.f_rect = self.f_rect.move(self.x, self.y)
-        if self.f_rect.left < 0 or self.f_rect.right > 1366:
-            self.x *= -1
-        if self.f_rect.top < 0 or self.f_rect.bottom > 500:
-            self.y *= -1 
-
-#        self.y += 1                          #         future reference just copy the arrow code from github
-                                              #         y +=1 is right just have to make the fireball random and disappear
+        # Update the decimal position of the fb.
+        self.y += self.speed_factor
         # Update the rect position.
-        self.f_rect.y = self.y
+        self.rect.y = self.y
 
-    def blitme(self):
-#       sleep(1)
-       self.screen.blit(self.fb , self.f_rect)
-#       sleep(1)
+    def draw_fb(self):
+        """Draw the fb to the screen."""
+        pg.draw.rect(self.screen, (60,60,60), self.rect)

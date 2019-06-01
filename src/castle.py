@@ -10,10 +10,10 @@ import script
 from gameset import itr, Levels
 
 class Castle(object):
-    def __init__(self,cname, age, level, reputation, cl):
-        self.cname,self.age,self.level,self.reputation = cname,age,level,reputation
+    def __init__(self,cname, age, level, reputation, cl, username, password):
+        self.cname,self.age,self.level,self.reputation, self.username, self.password = cname,age,level,reputation, username, password
         self.cl,self.s  = cl, script.csts(cname, level)
-        self.l=Levels(self.cname,self.age)
+        self.l=Levels(self.cname,self.age, self.username, self.password)
 
     def parse(self):
         itr(self.s, 0, 4)
@@ -22,13 +22,13 @@ class Castle(object):
         q1 = input("\n: ")
 
         if q1 == '1':
-            if self.cl < 6:
+            if self.cl != 5:
                 itr(self.s, 5, 9)
             else:
                 itr(self.s, 9, 13)
                 raise SystemExit
         else:
-            if self.cl < 6:
+            if self.cl != 5:
                 itr(self.s, 14, 15)
                 raise SystemExit
             else:
@@ -37,14 +37,14 @@ class Castle(object):
         q2 = input("\n: ")
 
         if q2 == '1':
-            if self.cl > 6:
+            if self.cl == 5:
                 itr(self.s, 23, 25)
             else:
                 itr(self.s, 20, 23)
                 raise SystemExit
         else:
             itr(self.s, 26, 38)
-            if self.cl < 6:
+            if self.cl != 5:
                 itr(self.s, 38, 39)
                 raise SystemExit
             else:

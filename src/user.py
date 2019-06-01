@@ -12,12 +12,11 @@ import pygame as pg
 import sys, os
 from pygame.sprite import Sprite
 
-global cwd
 cwd = os.getcwd()
 
 class Bow(Sprite):
     def __init__(self, screen):
-        super().__init__()
+        super(Bow, self).__init__()
         self.health = 100
         self.bow = pg.image.load(f"{cwd}"+"/images/bow.bmp")
         self.screen = screen

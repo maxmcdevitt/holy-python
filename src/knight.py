@@ -17,7 +17,6 @@ class Knight(Sprite):
 
     def __init__(self, cwd):
         super().__init__()
-        self.health = 100
         self.knight = pg.image.load(f"{cwd}"+"/images/knight.bmp")
         self.k_rect = self.knight.get_rect()
         self.y = 1 # Vertical position

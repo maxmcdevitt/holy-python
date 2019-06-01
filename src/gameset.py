@@ -21,21 +21,21 @@ FILE = DATABASE_PATH+"/users.sqlite3"
 
 def itr(script, s=None, e=None):
     """
-    Iterates an iterable given the parameters s (start) and 
+    Iterates an iterable given the parameters s (start) and
     e (end).
     """
 
     if s and e:
         for i in script[s:e]:
-            sleep(3)
+#            sleep(3)
             print('\n'+i)
     if s and not e:
         for i in script[s:]:
-            sleep(3)
+#            sleep(3)
             print('\n'+i)
     if e and not s:
         for i in script[:e]:
-            sleep(3)
+ #           sleep(3)
             print('\n'+i)
 
 
@@ -45,7 +45,7 @@ def add_user():
         username = input("Username: ")
         if username == None or username == " ":
             print("Username can not be empty.\n")
-        
+
         pass_ = gp.getpass("password: ")
         if pass_== None or pass_ == " ":
             print("Password can not be empty.\n")
@@ -55,7 +55,7 @@ def add_user():
             del pass_
             break
         raise SystemExit
-        
+
     return username, password
 
 def load_variables(*args):
@@ -117,9 +117,8 @@ def save(level, age, cname, reputation, cl, username=None, password=None):
             cur.executemany('UPDATE data SET level=?,age=?,cname=?,reputation=?,cl=?,username=?,password=?', (data, ))
         elif username is None and password is None:
             data = (level, age, cname, reputation, cl)
-            cur.executemany('UPDATE data SET level=?, age=?, cname=?, reputation=?, cl=? ', (data, ))
-        
- 
+            cur.executemany('INSERT INTO data VALUES (?,?,?,?,?,)', (data, ))
+#            cur.executemany('UPDATE data SET level=?, age=?, cname=?, reputation=?, cl=? ', (data, ))
 
 def initialize_new_game():
     """ Starts a fresh game """
@@ -137,8 +136,8 @@ def initialize_new_game():
     return cname, age, username, password
 
 class Levels(object):
-    def __init__(self, cname, age):
-        self.cname, self.age = cname, age
+    def __init__(self, cname, age, username, password):
+        self.cname, self.age, self.username, self.password = cname, age, username, password
         self.attributes = {
             "dunce" : ["The Dunce...drool and fart?"],
             "jester" : ["The Jester can juggle and do a backflip, nothing particularly helpful though.."],
@@ -167,9 +166,9 @@ class Levels(object):
 
     def level_up(self):
         """  Uses a nested dictionary to "level up".
-        Takes the two parameters cname and age because it needs to save() after. 
+        Takes the two parameters cname and age because it needs to save() after.
         """
-        
+
         sleep(1)
         for i in range(80):
             i+=1
@@ -187,6 +186,6 @@ class Levels(object):
         print(f"\nCongrats, {self.cname}, you have leveled up, you are now a {level}!\n")
 
 
-        save(level, self.age, self.cname, reputation, cl)
+        save(level, self.age, self.cname, reputation, cl, self.username, self.password)
 
         return cl, level, reputation

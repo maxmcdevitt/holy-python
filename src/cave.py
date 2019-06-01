@@ -15,14 +15,15 @@ y=['y','yes']
 yes = [x.lower() for x in y]
 
 class Cave(object):
-    def __init__(self, cname, age, level, reputation, cl):
+    def __init__(self, cname, age, level, reputation, cl, username, password):
         self.cname,self.age,self.level,self.reputation =cname,age,level,reputation
         self.cl,self.s  = cl, script.cs(cname)
+        self.username, self.password = username, password
 
     def parse(self):
         """  Parses the script and outputs nicely formatted text. """
-        l =Levels(self.cname, self.age)
-        level_up = l.level_up()
+        l =Levels(self.cname, self.age, self.username, self.password)
+
         itr(self.s, 0, 15)
         q1 = input("\n: ")
         if q1 in yes:
@@ -33,7 +34,7 @@ class Cave(object):
         itr(self.s, 16, 38)
         if self.cl == 2:
             itr(self.s, 38, 39)
-            level_up
+            l.level_up()
         else:
             itr(self.s, 39, 40)
             raise SystemExit
@@ -43,7 +44,7 @@ class Cave(object):
 
         if q2 == '1':
             itr(self.s, 43, 45)
-            level_up
+            l.level_up()
         else:
             itr(self.s, 44, 46)
 
@@ -65,6 +66,6 @@ class Cave(object):
             q4 = input("What was the number?\n: ")
             if q4 == num:
                 itr(self.s, 60, 61)
-                level_up
+                l.level_up()
             else:
                 itr(self.s, 61, 63)

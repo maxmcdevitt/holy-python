@@ -1,0 +1,210 @@
+		"You choose to travel to the unknown...", #  0
+		"There is a thick fog and shallow water", #  1
+		"You cannot see into the murky water", #  2
+		"You step along as a snake slithers by", #  3
+		"whooooosh", #  4
+		"fwump", #  5
+		"An arrow comes flying from nowhere and plants itself firmly in your shoe", #  6
+		"It reads:
+'Concorde! Concorde, speak to me! To whoever finds this
+note, I have been imprisoned by my father, who wishes me to marry against my will.
+Please, please, please come and rescue me. I am in the tall tower of Swamp Castle."'", #  7
+		"You rush to the tower and hastily kill everyone in standing in your way", #  8
+		"You go to the tower to find the prisoner", #  9
+		"Father:  One day, lad, all this will be yours!", #  10
+		"Herbert:  What, the curtains?", #  11
+		"Father:  No, not the curtains, lad.  All that you can see!  Stretched
+out over the hills and valleys of this land!  This'll be your kingdom,
+lad!", #  12
+		"Herbert:  But, Mother--", #  13
+		"Father:  Father, I'm Father.", #  14
+		"Herbert:  But Father, I don't want any of that.", #  15
+		"Father:  Listen, lad.  I've built this kingdom up from nothing.  When
+I started here, all there was was swamp.  All the kings said I was
+daft to build a castle in a swamp, but I built it all the same,
+just to show 'em.", #  16
+		"It sank into the swamp.  So, I built a second one.
+That sank into the swamp.  So I built a third one.  That burned down,
+fell over, then sank into the swamp.  But the fourth one stayed up.
+An' that's what your gonna get, lad -- the strongest castle in these
+islands.", #  17
+		"Herbert:  But I don't want any of that -- I'd rather--", #  18
+		"Father:  Rather what?!", #  19
+		"Herbert:  I'd rather... just...
+
+[music]
+
+...sing!", #  20
+		"Father:  Stop that, stop that!  You're not going to do a song while
+I'm here.  Now listen lad, in twenty minutes you're getting married to
+a girl whose father owns the biggest tracts of open land in Britain.", #  21
+		"Herbert:  But I don't want land.", #  22
+		"Father:  Listen, Alex,--", #  23
+		"Herbert:  Herbert.", #  24
+		"Father:  Herbert.  We live in a bloody swamp.  We need all the land we can get.", #  25
+		"Herbert:  But I don't like her", #  26
+		"Father:  Don't like her?!  What's wrong with her?  She's beautiful,
+she's rich, she's got huge... tracts of land.", #  27
+		"Herbert:  I know, but I want the girl that I marry to have...
+a certain... 
+special...
+[music]
+...something...", #  28
+		"Father:  Cut that out, cut that out.  Look, you're marryin' Princess
+Lucky, so you'd better get used to the idea. [smack]  Guards!  Make sure
+the Prince doesn't leave this room until I come and get 'im.", #  29
+		"GUARD #1:  Not to leave the room even if you come and get him.", #  30
+		"GUARD #2:  Hic!", #  31
+		"Father:  No, no.  Until I come and get 'im.", #  32
+		"GUARD #1:  Until you come and get him, we're not to enter the room.", #  33
+		"Father:  No, no, no.  You stay in the room and make sure 'e doesn't leave.", #  34
+		"GUARD #1:  And you'll come and get him.", #  35
+		"GUARD #2:  Hic!", #  36
+		"Father:  Right.", #  37
+		"GUARD #1:  We don't need to do anything, apart from just stop him entering the room.", #  38
+		"Father:  No, no.  Leaving the room.", #  39
+		"GUARD #1:  Leaving the room, yes.", #  40
+		"Father:  All right?", #  41
+		"GUARD #1:  Right.  Oh, if-if-if, uh, if-if-if, uh, if-if-if we...", #  42
+		"Father:  Yes, what is it?", #  43
+		"GUARD #1:  Oh, if-if, oh--", #  44
+		"Father:  Look, it's quite simple.", #  45
+		"GUARD #1:  Uh...", #  46
+		"Father:  You just stay here, and make sure 'e doesn't leave the room. All right?", #  47
+		"GUARD #2:  Hic!", #  48
+		"Father:  Right.", #  49
+		"GUARD #1:  Oh, I remember.  Uh, can he leave the room with us?", #  50
+		"Father:  N- No no no.  You just keep him in here, and make sure--", #  51
+		"GUARD #1:  Oh, yes, we'll keep him in here, obviously.  But if he had to leave and we were--", #  52
+		"Father:  No, no, just keep him in here--", #  53
+		"GUARD #1:  Until you, or anyone else,--", #  54
+		"Father:  No, not anyone else, just me--", #  55
+		"GUARD #1:  Just you.", #  56
+		"GUARD #2:  Hic!", #  57
+		"Father:  Get back.", #  58
+		"GUARD #1:  Get back.", #  59
+		"Father:  Right?", #  60
+		"GUARD #1:  Right, we'll stay here until you get back.", #  61
+		"Father:  And, uh, make sure he doesn't leave.", #  62
+		"GUARD #1:  What?", #  63
+		"Father:  Make sure 'e doesn't leave.", #  64
+		"GUARD #1:  The Prince?", #  65
+		"Father:  Yes, make sure 'e doesn't leave.", #  66
+		"GUARD #1:  Oh, yes, of course.  I thought you meant him.  Y'know, it
+seemed a bit daft, me havin' to guard him when he's a guard.", #  67
+		"Father:  Is that clear?", #  68
+		"GUARD #2:  Hic!", #  69
+		"GUARD #1:  Oh, quite clear, no problems.", #  70
+		"Father:  Right.
+[starts to leave]
+Where are you going?", #  71
+		"GUARD #1:  We're coming with you.", #  72
+		"Father:  No no, I want you to stay 'ere and make sure 'e doesn't leave.", #  73
+		"GUARD #1:  Oh, I see.  Right.", #  74
+		"Herbert:  But, Father!", #  75
+		"Father:  Shut your noise, you!  And get that suit on!  And no singing!", #  76
+		"GUARD #2:  Hic!", #  77
+		"Father:  Oh, go get a glass of water.", #  78
+		"x: O fair one, behold your humble servant Sir x.
+I have come to take", #  79
+		"(You see that it is actually a boy)", #  80
+		"-- oh, I’m terribly sorry.", #  81
+		"Herbert: You got my note!", #  82
+		"x: Uh, well, I got A note.", #  83
+		"Herbert: :You’ve come to rescue me!", #  84
+		"x: Uh, well, no, you see...", #  85
+		"Herbert: I knew that someone would, I knew that somewhere out there...", #  86
+		"there must be...
+[music]", #  87
+		"...someone...", #  88
+		"Father: Stop that, stop that, stop it! Stop it! Who are you?", #  89
+		"Herbert: I’m your son!", #  90
+		"Father: No, not you.", #  91
+		"x: I’m Sir x, Sir", #  92
+		"Herbert: He’s come to rescue me, father.", #  93
+		"x: Well, let’s not jump to conclusions", #  94
+		"Father: Did you kill all the guards?", #  95
+		"x: Uh..., oh, yes. Sorry.", #  96
+		"Father: They cost fifty pounds each.", #  97
+		"x: Well, I’m awfully sorry, I’m -- I really can explain everything.", #  98
+		"Herbert: Don’t be afraid of him, Sir x, I’ve got a rope all ready!", #  99
+		"Father: You killed eight wedding guests in all!", #  100
+		"x: Well, you see, the thing is, I thought your son was a lady.", #  101
+		"Father: I can understand that.", #  102
+		"Herbert: Hurry, Sir x! Hurry!", #  103
+		"Father: Shut up! You only killed the bride’s father, that’s all!", #  104
+		"x: Well, I really didn’t mean to...", #  105
+		"Father: Didn’t mean to? You put your sword right through his head!", #  106
+		"x: Oh, dear. Is he all right?", #  107
+		"Father: You even kicked the bride in the chest! This is going to cost me a fortune!", #  108
+		"x: Well, I can explain. I was in the forest, um, riding north from Castle
+        when I got this note you see--", #  109
+		"FATHER:  Pretty nice castle.  Uh, pretty good pig country....", #  110
+		"x:  Yes.", #  111
+		"HERBERT:  Hurry, I'm ready!", #  112
+		"FATHER:  Would you, uh, like to come and have a drink?", #  113
+		"x:  Well, that's, uh, awfully nice of you.", #  114
+		"HERBERT:  I am ready!
+[starts to leave]", #  115
+		"x:  --I mean to be, so understanding.
+[thonk]", #  116
+		"HERBERT:  Oooh!", #  117
+		"x:  Um, I think when I'm in this  idiom, I sometimes get a bit,
+            uh, sort of carried away.", #  118
+		"FATHER:  Oh, don't worry about that.", #  119
+		"HERBERT:  Oooh!
+[splat]", #  120
+		"FATHER:  Well, this is the main hall.  We're going to have all this
+knocked through, and made into one big, uh, living room.", #  121
+		"RANDOM:  There he is!", #  122
+		"FATHER:  Oh, bloody hell.", #  123
+		"x:  Ha-ha! etc.", #  124
+		"FATHER:  Hold it, hold it!  Please!", #  125
+		"x:  Sorry, sorry.  See what I mean, I just get carried away.
+I really must -- sorry, sorry!  Sorry, everyone.", #  126
+		"RANDOM:  He's killed the best man!", #  127
+		"FATHER:  Hold it, please!  Hold it!  This is Sir Launcelot from the
+court of Camelot -- a very brave and influential knight, and my special
+guest here today.", #  128
+		"x:  Hello.", #  129
+		"RANDOM:  He killed my auntie!
+[yelling]", #  130
+		"FATHER:  Please, please!  This is supposed to be a happy occasion!
+Let's not bicker and argue about who killed who.  We are here today to
+witness the union of two young people in the joyful bond of the holy
+wedlock.  Unfortunately, one of them, my son Herbert, has just fallen
+to his death.  But I think I've not lost a son, so much as... gained
+a daughter!  For, since the tragic death of her father--", #  131
+		"RANDOM:  He's not quite dead!", #  132
+		"FATHER:  Since the near fatal wounding of her father--", #  133
+		"RANDOM:  He's getting better!", #  134
+		"FATHER:  For, since her own father... who, when he seemed about to
+recover, suddenly felt the icy hand of death upon him,...
+
+[ugh]", #  135
+		"RANDOM:  Oh, he's died!", #  136
+		"FATHER:  And I want his only daughter to look upon me... as her own
+dad -- in a very real, and legally binding sense.
+[clapping]
+And I feel sure that the merger -- uh, the union -- between the
+Princess and the brave, but dangerous, Sir Launcelot of Camelot...", #  137
+		"x:  What?", #  138
+		"RANDOM:  Look!  The dead Prince!", #  139
+		"CONCORDE:  He's not quite dead!", #  140
+		"HERBERT:  Oh, I feel much better.", #  141
+		"FATHER:  You fell out of the tower, you creep!", #  142
+		"HERBERT:  No, I was saved at the last minute.", #  143
+		"FATHER:  How?!", #  144
+		"HERBERT:  Well, I'll tell you...
+[music]", #  145
+		"FATHER:  Not like that!  Not like that!  No, stop it!", #  146
+		"SINGING:  He's going to tell!  He's going to tell!", #  147
+		"FATHER:  Shut up!", #  148
+		"SINGING:  He's going to tell!  He's going to tell!
+He's going to tell!  He's going to tell!
+He's going to tell!  He's going to tell!
+He's going to tell!  He's going to tell!
+        "CONCORDE:  Quickly, sir!  This way!", #  149
+		"x:  No, it's not in my idiom!  I must escape more....(sigh)", #  150
+		"CONCORDE:  Dramatically, sir?", #  151
+		"x:  Dramatically!  Hee!  Ha!", #  152

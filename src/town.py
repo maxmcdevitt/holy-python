@@ -12,11 +12,11 @@ import script
 
 
 class Town(object):
-    def __init__(self, cname, age, level, reputation, cl):
+    def __init__(self, cname, age, level, reputation, cl, username, password):
         self.cname,self.age,self.level,self.reputation =cname,age,level,reputation
         self.cl,self.s  = cl, script.tscript(cname, level)
-        self.l=Levels(self.cname,self.age)
-
+        self.username, self.password = username, password
+        self.l=Levels(self.cname,self.age, self.username, self.password)
     def parse(self):
       itr(self.s , 0, 14)
       q1 = input('\n: ')

@@ -13,34 +13,36 @@ from scoreboard import Scoreboard
 from time import sleep
 import pygame as pg
 from user import Arrow
+from pygame.locals import *
+
 
 
 def check_keydown_events(event, screen, bow, arrows):
     """Respond to keypresses."""
-    if event.key == pg.K_RIGHT:
+    if event.key == K_RIGHT:
         bow.moving_right = True
-    elif event.key == pg.K_LEFT:
+    elif event.key == K_LEFT:
         bow.moving_left = True
-    elif event.key == pg.K_SPACE:
+    elif event.key == K_SPACE:
         fire_arrow( screen, bow, arrows)
-    elif event.key == pg.K_q:
+    elif event.key == K_q:
         sys.exit()
         
 def check_keyup_events(event, bow):
     """Respond to key releases."""
-    if event.key == pg.K_RIGHT:
+    if event.key == K_RIGHT:
         bow.moving_right = False
-    elif event.key == pg.K_LEFT:
+    elif event.key == K_LEFT:
         bow.moving_left = False
 
 def check_events(screen,bow, arrows):
     """Respond to keypresses and mouse events."""
     for event in pg.event.get():
-        if event.type == pg.QUIT:
+        if event.type == QUIT:
             sys.exit()
-        elif event.type == pg.KEYDOWN:
+        elif event.type == KEYDOWN:
             check_keydown_events(event,  screen, bow, arrows)
-        elif event.type == pg.KEYUP:
+        elif event.type == KEYUP:
             check_keyup_events(event, bow)
             
 def fire_arrow( screen, bow, arrows):
@@ -60,7 +62,7 @@ def update_arrows(screen, bow, arrows):
         if arrow.rect.bottom <= 0:
             arrows.remove(arrow)
 
-def update_fbs(screen, bow, fbs):
+def update_fbs(screen, bow, knight, fbs, arrows):
     """Update position of fireballs, and get rid of old fireballs."""
     # Update arrow positions.
     fbs.update()
@@ -69,6 +71,7 @@ def update_fbs(screen, bow, fbs):
     for fb in fbs.copy():
         if fb.rect.bottom <= 0:
             fb.remove(fb)
+    check_fb_bow_collisions(screen, bow,  fbs, arrows)
 
 def win(screen):
     pg.font.init()
@@ -84,7 +87,7 @@ def win(screen):
         screen.blit(msg, (50,50))
         sleep(.5)
         screen.fill(bg)
-        bg.blit(msg, 50)
+#        bg.blit(msg, 50)
         pg.display.flip()
              
         
@@ -95,11 +98,11 @@ def check_arrow_knight_collision(screen, bow, knight, arrow):
     sb = Scoreboard(screen)
     collisions = knight.k_rect.colliderect(arrow.arrow.get_rect())
 #    pg.sprite.groupcollide(arrows, knight.k_rect, True, True)
-
+    health = 100
     if collisions:
-        knight.health - 5
+        health - 5
 #        arrows.remove(arrow)
-        sb.show_health()
+        sb.show_health(health)
     if knight.health == 0:
         win(screen)
 
@@ -110,14 +113,16 @@ def check_fb_bow_collisions(screen, bow, fbs, arrows):
     
     if collisions:
         bow.health - 20
-    if len() == 0:
+#    if len(bow) == 0:
+#        lose()
+#        raise SystemExit
         # If the entire fleet is destroyed, start a new level.
-        arrows.empty()
 
 
 
 def bow_hit(screen, bow, arrows):
     """Respond to bow being hit by knight."""
+    bows_left= 3
     if bows_left > 0:
         # Decrement bows_left.    font = pygame.font.Font(None, 36)
 

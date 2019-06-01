@@ -12,13 +12,15 @@ from gameset import itr, Levels
 import script
 
 class Woods(object):
-    def __init__(self, cname, age, level, reputation, cl):
+    def __init__(self, cname, age, level, reputation, cl, username, password):
+        self.username = username
+        self.password = password
         self.cname = cname
         self.lvl = level
         self.cl = cl
         self.age = age
         self.s = script.ws(cname)
-        self.l=Levels(self.cname, self.age)
+        self.l=Levels(self.cname, self.age, self.username, self.password)
 
     def parse(self):
         itr(self.s, 0, 1)
@@ -45,9 +47,9 @@ class Woods(object):
         elif q2 == 'forest':
             itr(self.s, 41 , 45)
             raise SystemExit
-        
+
         itr(self.s, 45, 48)
-        
+
         q3 = input("\n: ")
         if q3 == 'stay':
             itr(self.s, 49, 50)

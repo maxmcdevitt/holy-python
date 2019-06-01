@@ -31,22 +31,19 @@ def main():
     bow = Bow(screen)
     arrow = Arrow(screen, bow)
     arrows = Group()
+    fbs = Group()
     sb = Scoreboard(screen)
-    fb = Fireball(screen, cwd)        
 #    func.win(screen)
     while 1:
+        bow.update()
         func.check_events(screen,bow,arrows)
         k.move(cwd)
-        func.check_arrow_knight_collision(screen, bow, k, arrow)
-        bow.update()
         func.update_arrows(screen, bow, arrows)
         screen.blit(background, (0, 0))        #draw the background
         screen.blit(k.knight, k.k_rect)
         for arrow in arrows.sprites():
             arrow.blitme()
-        fb.update()
-        fb.blitme() 
-        bow.blitme()
+        func.update_fbs(screen, bow, k, fbs, arrows)
         sb.show_health()
         pg.display.flip()
 
