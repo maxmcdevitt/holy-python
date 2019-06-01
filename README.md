@@ -29,9 +29,7 @@ You can travel to:
 
 ###### How to download and run
 
-Either clone the repository or download and unpack the zip.
-
-Then simply compile the main.py file by:
-
-
-bash$  python main.py
+bash$  git clone https://github.com/maxmcdevitt/holy-python.git
+bash$  cd holy-python/src/
+bash$  chmod +x main.py
+bash$  ./main.py
