@@ -19,7 +19,7 @@ cwd = os.getcwd()
 DATABASE_PATH = os.path.join(cwd, "storage")
 FILE = DATABASE_PATH+"/users.sqlite3"
 
-def itr(script, s=None, e=None):
+def itr(script, s=None, e=None, t=3):
     """
     Iterates an iterable given the parameters s (start) and
     e (end).
@@ -27,15 +27,15 @@ def itr(script, s=None, e=None):
 
     if s and e:
         for i in script[s:e]:
-#            sleep(3)
+            sleep(t)
             print('\n'+i)
     if s and not e:
         for i in script[s:]:
-#            sleep(3)
+            sleep(t)
             print('\n'+i)
     if e and not s:
         for i in script[:e]:
- #           sleep(3)
+            sleep(t)
             print('\n'+i)
 
 

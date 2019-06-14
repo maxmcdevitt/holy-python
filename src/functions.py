@@ -27,7 +27,7 @@ def check_keydown_events(event, screen, bow, arrows):
         fire_arrow( screen, bow, arrows)
     elif event.key == K_q:
         sys.exit()
-        
+
 def check_keyup_events(event, bow):
     """Respond to key releases."""
     if event.key == K_RIGHT:
@@ -44,7 +44,7 @@ def check_events(screen,bow, arrows):
             check_keydown_events(event,  screen, bow, arrows)
         elif event.type == KEYUP:
             check_keyup_events(event, bow)
-            
+
 def fire_arrow( screen, bow, arrows):
     """Fire a arrow, if limit not reached yet."""
     # Create a new arrow, add to arrows group.
@@ -76,10 +76,10 @@ def update_fbs(screen, bow, knight, fbs, arrows):
 def win(screen):
     pg.font.init()
     font = pg.font.Font(None, 36)
-    
+
     while range(900):
         bg = (250,250,250)
-        msg = font.render("You Win!!!", 1, (10, 10, 10))
+        msg = font.render("You Win!!!", 1, (50, 50, 50))
         textpos = msg.get_rect()
         textpos.centerx = textpos.centerx
         screen.fill(bg)
@@ -89,8 +89,8 @@ def win(screen):
         screen.fill(bg)
 #        bg.blit(msg, 50)
         pg.display.flip()
-             
-        
+
+
 def check_arrow_knight_collision(screen, bow, knight, arrow):
     """Respond to arrow-knight collisions."""
     # Remove any arrows that have collided.
@@ -110,7 +110,7 @@ def check_fb_bow_collisions(screen, bow, fbs, arrows):
     """Respond to arrow-knight collisions."""
     # Remove any arrows that have collided.
     collisions = pg.sprite.groupcollide(fbs, bow, True, True)
-    
+
     if collisions:
         bow.health - 20
 #    if len(bow) == 0:
@@ -131,7 +131,7 @@ def bow_hit(screen, bow, arrows):
         raise SystemExit
     # Empty the list of  and arrows.
     arrows.empty()
-    
+
     # center the bow.
     bow.center_bow()
     sleep(0.5)

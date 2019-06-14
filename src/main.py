@@ -13,6 +13,7 @@ from woods import Woods
 from cave import Cave
 from castle import Castle
 from town import Town
+from unknown import Unknown
 
 
 YES = [x.lower() for x in ['yes', 'y']]
@@ -55,12 +56,14 @@ class Main(object):
         cave = Cave(*arg)
         castle = Castle(*arg)
         town = Town(*arg)
+        unknown = Unknown(*arg)
 
         locations = {
             "woods" : woods,
             "cave" : cave,
             "castle" : castle,
-            "town" : town
+            "town" : town,
+            "unknown": unknown
         }
         while True:
             q = input("\nDo you want to travel? ")

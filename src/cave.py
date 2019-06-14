@@ -69,3 +69,4 @@ class Cave(object):
                 l.level_up()
             else:
                 itr(self.s, 61, 63)
+                raise SystemExit
