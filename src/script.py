@@ -563,3 +563,5 @@ def camelot(cname, level):
         "",
         "",
         f"{cname}: ",
+    ]
+    return script

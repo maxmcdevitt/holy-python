@@ -9,12 +9,7 @@ main.py
 
 import os, getpass
 import gameset as gs
-from woods import Woods
-from cave import Cave
-from castle import Castle
-from town import Town
-from unknown import Unknown
-
+import levels
 
 YES = [x.lower() for x in ['yes', 'y']]
 NO = [x.lower() for x in ['no', 'n']]
@@ -52,19 +47,16 @@ class Main(object):
         Acts as a portal to locations
         """
         arg = [cname, age, level, reputation, cl, username, password]
-        woods = Woods(*arg)
-        cave = Cave(*arg)
-        castle = Castle(*arg)
-        town = Town(*arg)
-        unknown = Unknown(*arg)
+        rl = levels.RunLevels(*arg)        
 
         locations = {
-            "woods" : woods,
-            "cave" : cave,
-            "castle" : castle,
-            "town" : town,
-            "unknown": unknown
+            "woods" : rl.parse_woods ,
+            "cave" : rl.parse_cave ,
+            "castle" : rl.parse_castle ,
+            "town" : rl.parse_town ,
+            "unknown": rl.parse_unknown 
         }
+
         while True:
             q = input("\nDo you want to travel? ")
             if q in NO:
@@ -72,11 +64,15 @@ class Main(object):
 
             if q in YES:
                 print("Where do you want to travel to?")
+
                 for k in locations.keys():
                     print(k.title())
+
                 dest = input('\n: ')
+
                 if dest in locations.keys():
-                    return locations[dest].parse()
+                    return locations[dest]()
+
             elif q in NO:
                 raise SystemExit
 
@@ -91,5 +87,6 @@ class Main(object):
 
 if __name__ == "__main__":
     main = Main()
+
     while True:
         main.run()
