@@ -9,7 +9,8 @@ This is a game based off Monty Python, since it is written in Python.
 
 In this game you create a character and explore a series of locations, while trying to progress through ten levels.
 
-It automatically saves your progress which allows the player to resume where they left off.
+** Features:
+- data stored in sql database, password is hashed + salted.
 
 You can travel to:
 
