@@ -14,14 +14,12 @@ import levels
 YES = [x.lower() for x in ['yes', 'y']]
 NO = [x.lower() for x in ['no', 'n']]
 
-
 cwd = os.getcwd()
 
 class Main(object):
     """
     Overly Complex Program
     """
-
     def start(self):
         """
         Iinitializes the game.
