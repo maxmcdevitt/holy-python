@@ -1,3 +1,28 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created in 2019
+gameset.py
+@author: Max McDevitt
+"""
+# Released under the GNU General Public License
+
+import getpass as gp
+import os
+import sqlite3 as lite
+from functools import wraps
+from operator import itemgetter
+from time import sleep
+from passlib.hash import pbkdf2_sha256
+
+cwd = os.getcwd()
+
+DATABASE_PATH = os.path.join(cwd, "storage")
+FILE = DATABASE_PATH+"/users.sqlite3"
+YES = [x.lower() for x in ['yes', 'y']]
+NO = [x.lower() for x in ['no', 'n']]
+
+
 def ws(cname):
     woods_script = [
             """You are following the path, it's eerie, quiet and
@@ -565,3 +590,417 @@ def camelot(cname, level):
         f"{cname}: ",
     ]
     return script
+
+
+def itr(script, s=None, e=None, t=3):
+    """
+    Iterates an iterable given the parameters s (start) and
+    e (end).
+    """
+
+    if s and e:
+        for i in script[s:e]:
+            sleep(t)
+            print('\n'+i)
+    if s and not e:
+        for i in script[s:]:
+            sleep(t)
+            print('\n'+i)
+    if e and not s:
+        for i in script[:e]:
+            sleep(t)
+            print('\n'+i)
+
+
+def add_user():
+    """ Add a user """
+    while True:
+        username = input("Username: ")
+        if username == None or username == " ":
+            print("Username can not be empty.\n")
+
+        pass_ = gp.getpass("password: ")
+        if pass_== None or pass_ == " ":
+            print("Password can not be empty.\n")
+        else:
+            password = pbkdf2_sha256.hash(pass_)
+            password = password.encode('utf-8')
+            del pass_
+            break
+        raise SystemExit
+
+    return username, password
+
+def load_variables(*args):
+    options = {"level":0, "age":1, "cname":2, "reputation":3, "cl":4, "username":5, "password":6}
+    con = None
+    con = lite.connect(FILE)
+    x = len(args)
+    indices = []
+    with con:
+        cur = con.cursor()
+        cur.execute("SELECT * FROM data")
+        a = 0
+        data = cur.fetchone()
+    for i in args:
+        if i in options.keys():
+            val = options.get(i)
+            index = itemgetter(val)(data) if (a<x) else None
+            if index == None:
+                break
+            indices.append(index)
+            a+=1
+    return indices
+
+def authenticate(f):
+    """ compares the given username and password to the ne stored previously  """
+    @wraps(f)
+    def decoration(*args, **kwargs):
+        l = load_variables("username", "password")
+        usname, _pass = l[0], l[1]
+        username, password = f()
+        if pbkdf2_sha256.verify(password, _pass) is False:
+            print("Invalid passwprd.")
+            raise SystemExit
+
+        while True:
+            if username != usname:
+                print("Invalid Username or password.")
+                raise SystemExit
+            else:
+                break
+    return decoration
+
+@authenticate
+def login():
+    username = input("Username: ")
+    password = gp.getpass("password: ")
+    return username, password
+
+def save(level, age, cname, reputation, cl, username=None, password=None):
+    """ Saves the attributes and given data into the sql file. """
+    con = lite.connect(FILE)
+    with con:
+        cur = con.cursor()
+        cur.execute('drop table if exists data')
+        cur.execute('create table data (level TEXT , age INT , cname TEXT , reputation INT , cl INT , username TEXT, password INT)')
+        if username and password:
+            data = (level, age, cname, reputation, cl, username, password)
+            cur.executemany('INSERT INTO data VALUES (?,?,?,?,?,?,?)', (data, ))
+            cur.executemany('UPDATE data SET level=?,age=?,cname=?,reputation=?,cl=?,username=?,password=?', (data, ))
+        elif username is None and password is None:
+            data = (level, age, cname, reputation, cl)
+            cur.executemany('INSERT INTO data VALUES (?,?,?,?,?,)', (data, ))
+#            cur.executemany('UPDATE data SET level=?, age=?, cname=?, reputation=?, cl=? ', (data, ))
+
+def initialize_new_game():
+    """ Starts a fresh game """
+    if not os.path.isdir(DATABASE_PATH):
+        os.mkdir('storage')
+
+    username, password = add_user()
+    level = ""
+    reputation = 0
+    cname = input("What will your character's name be?\n: ")
+    age = input("What will your character's age be?\n: ")
+    cl=0
+    save(level, age, cname, reputation, cl, username=username, password=password)
+
+    return cname, age, username, password
+
+class Levels(object):
+    def __init__(self, cname, age, username, password):
+        self.cname, self.age, self.username, self.password = cname, age, username, password
+        self.attributes = {
+            "dunce" : ["The Dunce...drool and fart?"],
+            "jester" : ["The Jester can juggle and do a backflip, nothing particularly helpful though.."],
+            "serf" : ["The Serf can raise his pitfork angrily." ],
+            "merchant" : ["The Merchant can utilize his secret inventory."],
+            "knight" : ["The knight can use his sword and training to be an effective fighter"],
+            "blackknight" : ["The Black Knight can use his mastery to defeat even the most fearsome aggresors."],
+            "master" : ["He can command his army to do whatever he wants."],
+            "wizard" : ["The wizard can cast spells and use magic."],
+            "prince" : ["The prince is able to almost anything."],
+            "king" : ["The knight is able to do anything."],
+            }
+
+        self.lvl = {
+                1:{2:'dunce',3: -100},
+                2:{2:'jester',3: -70},
+                3:{2:'serf', 3:-45},
+                4:{2:'merchant', 3:-10},
+                5:{2:'knight' ,3:0},
+                6:{2:'blackknight',3:10},
+                7:{2:'master', 3:30},
+                8:{2:'wizard', 3:50},
+                9:{2:'prince', 3:75},
+                10:{2:'king', 3:100},
+                }
+
+    def level_up(self):
+        """  Uses a nested dictionary to "level up".
+        Takes the two parameters cname and age because it needs to save() after.
+        """
+
+        sleep(1)
+        for i in range(80):
+            i+=1
+            print("*"*120)
+            sleep(.02)
+        _=os.system("clear")
+
+        buf =load_variables("cl")
+        cl = buf[-1]
+        cl=int(cl)     # cl means current level
+        cl+=1
+
+        level=self.lvl[cl][2] # Set level = to the appropritate level
+        reputation=self.lvl[cl][3]   # same as above but for reputation.
+        print(f"\nCongrats, {self.cname}, you have leveled up, you are now a {level}!\n")
+
+
+        save(level, self.age, self.cname, reputation, cl, self.username, self.password)
+
+        return cl, level, reputation
+
+
+class RunLevels(object):
+    def __init__(self,cname, age, level, reputation, cl, username, password):
+        self.cname,self.age,self.level,self.reputation,self.username,self.password=cname,age,level,reputation,username,password
+        self.cl  = cl
+        self.l=Levels(self.cname,self.age, self.username, self.password)
+        self.castle_script = csts(cname, level)
+        self.cave_script = cs(cname)
+        self.woods_script = ws(cname)
+        self.unknown_script = unknown(cname)
+        self.town_script = tscript(cname, level)
+        self.camelot_script = camelot(cname, level)
+
+    def parse_woods(self):
+        itr(self.woods_script, 0, 1)
+        q1 = input("\n: ")
+        if q1 == "left":
+            if self.cl > 3:
+                itr(self.woods_script, 1, 4)
+                itr(self.woods_script, 5, 9)
+                input(itr(self.woods_script[9:12]))
+
+            else:
+                itr(self.woods_script, 1, 5)
+                raise SystemExit
+
+        else:
+            pass
+        itr(self.woods_script,13,21)
+        q2 = input("\n: ")
+        if q2 == 'cave':
+            itr(self.woods_script, 22, 25)
+            raise SystemExit
+        elif q2 == 'shrubber':
+            itr(self.woods_script, 25, 39)
+        elif q2 == 'forest':
+            itr(self.woods_script, 41 , 45)
+            raise SystemExit
+
+        itr(self.woods_script, 45, 48)
+
+        q3 = input("\n: ")
+        if q3 == 'stay':
+            itr(self.woods_script, 49, 50)
+            q4=input("\n: ")
+            if q4=="talk":
+                itr(self.woods_script, 52, 54)
+            else:
+                if self.cl == 1:
+                    itr(self.woods_script, 54, 55)
+                    self.l.level_up()
+                else:
+                    print("The strangers have killed you.")
+                    raise SystemExit
+
+        elif q3 == 'travel on':
+            self.l.level_up()
+ 
+
+    def parse_cave(self):
+        itr(self.cave_script, 0, 15)
+        q1 = input("\n: ")
+        if q1 in YES:
+             pass
+        else:
+             raise SystemExit
+
+        itr(self.cave_script, 16, 38)
+        if self.cl == 2:
+            itr(self.cave_script, 38, 39)
+            self.l.level_up()
+        else:
+            itr(self.cave_script, 39, 40)
+            raise SystemExit
+
+        itr(self.cave_script, 40, 42)
+        q2 = input("\n: ")
+
+        if q2 == '1':
+            itr(self.cave_script, 43, 45)
+            self.l.level_up()
+        else:
+            itr(self.cave_script, 44, 46)
+
+        itr(self.cave_script, 46, 48)
+        q3 = input("\n: ")
+        if q3 == '1':
+            itr(self.cave_script, 49, 55)
+        else:
+            itr(self.cave_script, 55, 60)
+            print("The lock quickly rotates to reveal a number!\n")
+            sleep(3)
+            _=os.system("clear")
+            import random
+            num = random.randint(10000, 90000)
+            num = str(num)
+            print(num)
+            sleep(2)
+            _=os.system("clear")
+            q4 = input("What was the number?\n: ")
+            if q4 == num:
+                itr(self.cave_script, 60, 61)
+                self.l.level_up()
+            else:
+                itr(self.cave_script, 61, 63)
+                raise SystemExit
+
+
+    def parse_town(self):
+      itr(self.town_script , 0, 14)
+      q1 = input('\n: ')
+      if q1 == 1:
+          itr(self.town_script, 15, 16)
+          raise SystemExit
+      else:
+          pass
+      itr(self.town_script, 14, 15)
+      itr(self.town_script , 16)
+      self.l.level_up()
+
+    def parse_castle(self):
+        itr(self.castle_script, 0, 4)
+
+        itr(self.castle_script, 4, 5)
+        q1 = input("\n: ")
+
+        if q1 == '1':
+            if self.cl != 5:
+                itr(self.castle_script, 5, 9)
+            else:
+                itr(self.castle_script, 9, 13)
+                raise SystemExit
+        else:
+            if self.cl != 5:
+                itr(self.castle_script, 14, 15)
+                raise SystemExit
+            else:
+                itr(self.castle_script, 15, 19)
+        itr(self.castle_script, 19, 20)
+        q2 = input("\n: ")
+
+        if q2 == '1':
+            if self.cl == 5:
+                itr(self.castle_script, 23, 25)
+            else:
+                itr(self.castle_script, 20, 23)
+                raise SystemExit
+        else:
+            itr(self.castle_script, 26, 38)
+            if self.cl != 5:
+                itr(self.castle_script, 38, 39)
+                raise SystemExit
+            else:
+                itr(self.castle_script, 39, 45)
+                self.l.level_up()
+
+    def parse_unknown(self):
+        itr(self.unknown_script, s=0, e=9)
+        if self.cl!=6:
+            print("\nYou were killed by the guards.\n")
+            raise SystemExit
+        itr(self.unknown_script, s=10, e=-1, t=2)
+
+    def parse_camelot(self):
+        pass
+
+
+cwd = os.getcwd()
+
+class Main(object):
+    """
+    Overly Complex Program
+    """
+    def start(self):
+        """
+        Iinitializes the game.
+        """
+
+        q = input("Do you want to start a new game?[y/n]\n: ")
+
+        if q in YES:
+            cname, age, username, password = initialize_new_game()
+            l = Levels(cname, age, username, password)
+            cl, level, reputation = l.level_up()
+
+        else:
+            login()
+            l = load_variables("level", "age", "cname", "reputation", "cl", "username", "password")
+            level,age,cname,reputation,cl,username,password=l[0],l[1],l[2],l[3],l[4],l[5],l[6]
+        save(level, age, cname, reputation, cl, username, password)
+
+        return cname, age, level, reputation, cl, username, password
+
+    def locs(self, cname, age, level, reputation, cl, username, password):
+        """
+        Acts as a portal to locations
+        """
+        arg = [cname, age, level, reputation, cl, username, password]
+        rl = RunLevels(*arg)        
+
+        locations = {
+            "woods" : rl.parse_woods ,
+            "cave" : rl.parse_cave ,
+            "castle" : rl.parse_castle ,
+            "town" : rl.parse_town ,
+            "unknown": rl.parse_unknown 
+        }
+
+        while True:
+            q = input("\nDo you want to travel? ")
+            if q in NO:
+                raise SystemExit
+
+            if q in YES:
+                print("Where do you want to travel to?")
+
+                for k in locations.keys():
+                    print(k.title())
+
+                dest = input('\n: ')
+
+                if dest in locations.keys():
+                    return locations[dest]()
+
+            elif q in NO:
+                raise SystemExit
+
+            elif q not in YES or q not in NO:
+                print("That is not a location, try again.")
+                pass
+
+    def run(self):
+        arg = self.start()
+        self.locs(*arg)
+
+
+if __name__ == "__main__":
+    main = Main()
+
+    while True:
+        main.run()
