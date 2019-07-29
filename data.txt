@@ -1,5 +1,0 @@
-  191 src/gameset.py
-  180 src/levels.py
-   92 src/main.py
-    4 src/z.py
-  467 total
